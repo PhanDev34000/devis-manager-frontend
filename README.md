@@ -1,59 +1,99 @@
-# Frontend
+# 📄 Devis Manager — Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
+Application web de gestion de devis freelance, construite avec Angular et NgRx.
 
-## Development server
+## 🚀 Stack technique
 
-To start a local development server, run:
+- **Angular 19** (standalone components, lazy loading)
+- **NgRx** (gestion d'état : store, actions, reducers, effects, selectors)
+- **RxJS** (programmation réactive)
+- **SCSS** (styles)
+- **jsPDF** (export PDF)
+- **TypeScript**
 
+## ✨ Fonctionnalités
+
+- 🔐 Authentification JWT (inscription, connexion, déconnexion)
+- 👥 Gestion des clients (CRUD complet)
+- 📋 Gestion des devis avec lignes dynamiques (FormArray)
+- 💶 Calculs HT/TVA/TTC en temps réel
+- 📊 Statuts de devis (brouillon, envoyé, accepté, refusé)
+- 🏠 Dashboard avec KPI et statistiques
+- 👤 Profil utilisateur (infos société + logo)
+- 📄 Export PDF professionnel généré côté client (jsPDF)
+  - Logo de la société
+  - Coordonnées émetteur et client
+  - Tableau des prestations avec calculs HT/TVA/TTC
+  - Mention légale "Bon pour accord"
+
+## 📁 Structure du projet
+```
+frontend/src/app/
+├── core/
+│   ├── guards/            # Auth guard
+│   ├── interceptors/      # JWT interceptor
+│   └── services/          # Services HTTP
+├── features/
+│   ├── auth/              # Login, Register, Profil
+│   ├── clients/           # Liste + Formulaire clients
+│   ├── dashboard/         # Dashboard KPI
+│   └── quotes/            # Liste + Formulaire + Détail devis
+├── shared/                # Composants réutilisables
+└── store/
+    ├── auth/              # NgRx Auth
+    ├── clients/           # NgRx Clients
+    └── quotes/            # NgRx Quotes
+```
+
+## 🧠 Architecture NgRx
+
+Chaque feature suit le pattern :
+```
+Action → Effect → API → Success/Failure Action → Reducer → State → Selector → Component
+```
+
+## ⚙️ Installation locale
 ```bash
+# Cloner le repo
+git clone https://github.com/PhanDev34000/devis-manager-frontend.git
+cd devis-manager-frontend
+
+# Installer les dépendances
+npm install
+
+# Lancer en développement
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🔧 Configuration
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+**Développement** — dans `src/environments/environment.ts` :
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/api'
+};
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+**Production** — dans `src/environments/environment.ts` :
+```typescript
+export const environment = {
+  production: true,
+  apiUrl: 'https://devis-manager-backend.onrender.com/api'
+};
 ```
 
-## Building
+## 🌐 Déploiement
 
-To build the project run:
+L'application est déployée sur **Vercel** :
+- URL : `https://devis-manager-frontend.vercel.app`
 
-```bash
-ng build
-```
+## 📸 Captures d'écran
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+| Dashboard | Liste Devis | Formulaire Devis |
+|---|---|---|
+| ![Dashboard]() | ![Devis]() | ![Formulaire]() |
 
-## Running unit tests
+## 👨‍💻 Auteur
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Stéphane Verniere** — [GitHub](https://github.com/PhanDev34000/portfolio)
