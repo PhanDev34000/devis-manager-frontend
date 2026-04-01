@@ -42,23 +42,22 @@ Application web de gestion de devis freelance, construite avec Angular et NgRx.
 
 ## 📁 Structure du projet
 
-```
-frontend/src/app/
-├── core/
-│   ├── guards/            # Auth guard
-│   ├── interceptors/      # JWT interceptor
-│   └── services/          # Services HTTP
-├── features/
-│   ├── auth/              # Login, Register, Profil
-│   ├── clients/           # Liste + Formulaire clients
-│   ├── dashboard/         # Dashboard KPI
-│   └── quotes/            # Liste + Formulaire + Détail devis
-├── shared/                # Composants réutilisables
-└── store/
-    ├── auth/              # NgRx Auth
-    ├── clients/           # NgRx Clients
-    └── quotes/            # NgRx Quotes
-```
+        frontend/src/app/
+        ├── core/
+        │   ├── guards/            # Auth guard
+        │   ├── interceptors/      # JWT interceptor
+        │   └── services/          # Services HTTP
+        ├── features/
+        │   ├── auth/              # Login, Register, Profil
+        │   ├── clients/           # Liste + Formulaire clients
+        │   ├── dashboard/         # Dashboard KPI
+        │   └── quotes/            # Liste + Formulaire + Détail devis
+        ├── shared/                # Composants réutilisables
+        └── store/
+            ├── auth/              # NgRx Auth
+            ├── clients/           # NgRx Clients
+            └── quotes/            # NgRx Quotes
+
 
 ## 🧠 Architecture NgRx
 
