@@ -1,0 +1,157 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin-top: 2px;
+  }
+}
+
+// Filtres
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--gray-200);
+  background: white;
+  color: var(--gray-600);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  &.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+}
+
+// Table
+.quotes-table-wrapper {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+}
+
+.quotes-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--gray-100);
+    transition: background 0.15s;
+
+    &:last-child { border-bottom: none; }
+    &:hover { background: var(--gray-50); }
+  }
+
+  td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--gray-800);
+  }
+}
+
+.quote-number {
+  font-weight: 600;
+  color: var(--primary) !important;
+}
+
+.quote-amount {
+  font-weight: 600;
+}
+
+.quote-actions {
+  display: flex;
+  gap: 6px;
+}
+
+// Badges statut
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &-draft    { background: var(--gray-100); color: var(--gray-600); }
+  &-sent     { background: #dbeafe; color: #1d4ed8; }
+  &-accepted { background: #dcfce7; color: #15803d; }
+  &-rejected { background: #fee2e2; color: #b91c1c; }
+}
+
+.state-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-400);
+
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  p { margin-bottom: 16px; }
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.alert-danger {
+  background: #fef2f2;
+  color: var(--danger);
+  border: 1px solid #fecaca;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+// Boutons petits
+.btn-sm {
+  padding: 5px 10px !important;
+  font-size: 12px !important;
+}

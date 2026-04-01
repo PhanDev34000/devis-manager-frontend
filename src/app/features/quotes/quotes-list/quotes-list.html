@@ -1,0 +1,92 @@
+<div class="page-header">
+  <div>
+    <h1>Devis</h1>
+    <p>Gérez vos devis freelance</p>
+  </div>
+  <a routerLink="/quotes/new" class="btn btn-primary">
+    + Nouveau devis
+  </a>
+</div>
+
+<!-- Filtres -->
+<div class="filters">
+  <button
+    *ngFor="let filter of filters"
+    class="filter-btn"
+    [class.active]="activeFilter === filter.value"
+    (click)="setFilter(filter.value)"
+  >
+    {{ filter.label }}
+  </button>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading$ | async" class="state-container">
+  <div class="spinner"></div>
+  <p>Chargement...</p>
+</div>
+
+<!-- Error -->
+<div *ngIf="error$ | async as error" class="alert alert-danger">
+  ⚠️ {{ error }}
+</div>
+
+<!-- Liste -->
+<div *ngIf="!(loading$ | async)">
+  <ng-container *ngIf="(quotes$ | async) as quotes">
+
+    <!-- Vide -->
+    <div *ngIf="filterQuotes(quotes).length === 0" class="state-container">
+      <p class="empty-icon">📋</p>
+      <p>Aucun devis trouvé</p>
+      <a routerLink="/quotes/new" class="btn btn-primary">
+        Créer un devis
+      </a>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="filterQuotes(quotes).length > 0" class="quotes-table-wrapper">
+      <table class="quotes-table">
+        <thead>
+          <tr>
+            <th>Numéro</th>
+            <th>Client</th>
+            <th>Date</th>
+            <th>Validité</th>
+            <th>Total TTC</th>
+            <th>Statut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quote of filterQuotes(quotes)">
+            <td class="quote-number">{{ quote.number }}</td>
+            <td>{{ quote.client.name }}</td>
+            <td>{{ quote.issueDate | date:'dd/MM/yyyy' }}</td>
+            <td>{{ quote.validUntil | date:'dd/MM/yyyy' }}</td>
+            <td class="quote-amount">
+              {{ getTotalTTC(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}
+            </td>
+            <td>
+              <span class="badge badge-{{ quote.status }}">
+                {{ getStatusLabel(quote.status) }}
+              </span>
+            </td>
+            <td class="quote-actions">
+              <a [routerLink]="['/quotes', quote._id]" class="btn btn-secondary btn-sm">
+                👁️
+              </a>
+              <a [routerLink]="['/quotes', quote._id, 'edit']" class="btn btn-secondary btn-sm">
+                ✏️
+              </a>
+              <button (click)="onDelete(quote._id)" class="btn btn-danger btn-sm">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ng-container>
+</div>

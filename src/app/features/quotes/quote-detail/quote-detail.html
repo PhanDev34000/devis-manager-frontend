@@ -1,0 +1,151 @@
+<!-- Loading -->
+<div *ngIf="loading$ | async" class="state-container">
+  <div class="spinner"></div>
+  <p>Chargement...</p>
+</div>
+
+<ng-container *ngIf="quote$ | async as quote">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <div class="quote-number">{{ quote.number }}</div>
+      <h1>Devis — {{ quote.client.name }}</h1>
+      <p>Émis le {{ quote.issueDate | date:'dd/MM/yyyy' }} · Valide jusqu'au {{ quote.validUntil | date:'dd/MM/yyyy' }}</p>
+    </div>
+       
+    <div class="header-actions">
+      <button (click)="onExportPdf(quote)" class="btn btn-pdf">
+        📄 Exporter PDF
+      </button>
+      <a [routerLink]="['/quotes', quote._id, 'edit']" class="btn btn-secondary">
+        ✏️ Modifier
+      </a>
+      <a routerLink="/quotes" class="btn btn-secondary">
+        ← Retour
+      </a>
+    </div>
+  </div>
+
+  <div class="detail-layout">
+
+    <!-- Contenu principal -->
+    <div class="detail-main">
+
+      <!-- Infos client -->
+      <div class="detail-card">
+        <h2 class="section-title">Client</h2>
+        <div class="client-info">
+          <div class="client-avatar">
+            {{ quote.client.name[0].toUpperCase() }}
+          </div>
+          <div>
+            <p class="client-name">{{ quote.client.name }}</p>
+            <p class="client-email">{{ quote.client.email }}</p>
+            <p *ngIf="quote.client.phone" class="client-phone">
+              📞 {{ quote.client.phone }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lignes de prestation -->
+      <div class="detail-card">
+        <h2 class="section-title">Prestations</h2>
+
+        <div class="lines-table">
+          <div class="lines-header">
+            <span class="col-main">Prestation</span>
+            <span class="col-qty">Qté</span>
+            <span class="col-price">Prix HT</span>
+            <span class="col-vat">TVA</span>
+            <span class="col-total">Total HT</span>
+          </div>
+
+          <div *ngFor="let line of quote.lines" class="line-row">
+            <div class="col-main">
+              <p class="line-title">{{ line.title }}</p>
+              <p *ngIf="line.description" class="line-desc">{{ line.description }}</p>
+            </div>
+            <span class="col-qty">{{ line.quantity }}</span>
+            <span class="col-price">
+              {{ line.unitPrice | currency:'EUR':'symbol':'1.2-2':'fr' }}
+            </span>
+            <span class="col-vat">{{ line.vatRate }}%</span>
+            <span class="col-total line-amount">
+              {{ getLineHT(line.quantity, line.unitPrice) | currency:'EUR':'symbol':'1.2-2':'fr' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Totaux -->
+        <div class="totals">
+          <div class="total-row">
+            <span>Total HT</span>
+            <span>{{ getTotalHT(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+          </div>
+          <div class="total-row">
+            <span>TVA</span>
+            <span>{{ getTotalTVA(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+          </div>
+          <div class="total-row total-ttc">
+            <span>Total TTC</span>
+            <span>{{ getTotalTTC(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div *ngIf="quote.notes" class="detail-card">
+        <h2 class="section-title">Notes</h2>
+        <p class="notes-text">{{ quote.notes }}</p>
+      </div>
+
+    </div>
+
+    <!-- Sidebar statut -->
+    <div class="detail-sidebar">
+      <div class="detail-card">
+        <h2 class="section-title">Statut</h2>
+
+        <div class="current-status">
+          <span class="badge badge-{{ currentStatus ?? quote.status }}">
+            {{ getStatusLabel(currentStatus ?? quote.status) }}
+          </span>
+        </div>
+
+        <p class="status-label">Changer le statut :</p>
+        <div class="status-buttons">
+          <button
+            *ngFor="let s of statuses"
+            class="status-btn"
+            [class.active]="(currentStatus ?? quote.status) === s.value"
+            [class]="'status-btn status-btn-' + s.value"
+            (click)="onStatusChange(quote, s.value)"
+          >
+            {{ s.label }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Récap montants -->
+      <div class="detail-card amounts-card">
+        <h2 class="section-title">Montants</h2>
+        <div class="amount-row">
+          <span>HT</span>
+          <span>{{ getTotalHT(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+        </div>
+        <div class="amount-row">
+          <span>TVA</span>
+          <span>{{ getTotalTVA(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+        </div>
+        <div class="amount-row amount-ttc">
+          <span>TTC</span>
+          <span>{{ getTotalTTC(quote) | currency:'EUR':'symbol':'1.2-2':'fr' }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</ng-container>

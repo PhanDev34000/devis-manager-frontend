@@ -1,0 +1,208 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+
+  h1 { font-size: 22px; font-weight: 700; color: var(--gray-800); }
+  p  { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
+}
+
+// KPI Grid
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: box-shadow 0.2s;
+
+  &:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+  &-success { border-left: 3px solid var(--success); }
+  &-warning { border-left: 3px solid var(--warning); }
+}
+
+.kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+
+  &-clients  { background: #ede9fe; }
+  &-quotes   { background: #dbeafe; }
+  &-accepted { background: #dcfce7; }
+  &-sent     { background: #fef9c3; }
+}
+
+.kpi-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gray-800);
+  line-height: 1;
+}
+
+.kpi-label {
+  font-size: 12px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+// Dashboard grid
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  padding: 24px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin-bottom: 16px;
+}
+
+.link-all {
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+// Statuts
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.status-item {
+  display: grid;
+  grid-template-columns: 10px 100px 30px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  &.dot-draft    { background: var(--gray-400); }
+  &.dot-sent     { background: #3b82f6; }
+  &.dot-accepted { background: var(--success); }
+  &.dot-rejected { background: var(--danger); }
+}
+
+.status-name  { font-size: 13px; color: var(--gray-600); }
+.status-count { font-size: 13px; font-weight: 600; color: var(--gray-800); text-align: right; }
+
+.status-bar-wrap {
+  background: var(--gray-100);
+  border-radius: 4px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.status-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+
+  &.bar-draft    { background: var(--gray-400); }
+  &.bar-sent     { background: #3b82f6; }
+  &.bar-accepted { background: var(--success); }
+  &.bar-rejected { background: var(--danger); }
+}
+
+// Devis récents
+.recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+
+  &:hover { background: var(--gray-50); }
+}
+
+.recent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recent-number {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.recent-client {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px;
+  color: var(--gray-400);
+  font-size: 13px;
+}
+
+// Badges
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &-draft    { background: var(--gray-100); color: var(--gray-600); }
+  &-sent     { background: #dbeafe; color: #1d4ed8; }
+  &-accepted { background: #dcfce7; color: #15803d; }
+  &-rejected { background: #fee2e2; color: #b91c1c; }
+}

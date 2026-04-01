@@ -1,0 +1,128 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  p {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin-top: 2px;
+  }
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.client-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  &-body {
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 60px;
+  }
+
+  &-footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--gray-100);
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+}
+
+.client-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.client-info {
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  p {
+    font-size: 12px;
+    color: var(--gray-400);
+    margin-top: 2px;
+  }
+}
+
+.client-detail {
+  font-size: 13px;
+  color: var(--gray-600);
+}
+
+.state-container {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-400);
+
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  p { margin-bottom: 16px; }
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+
+  &-danger {
+    background: #fef2f2;
+    color: var(--danger);
+    border: 1px solid #fecaca;
+  }
+}

@@ -1,0 +1,137 @@
+<div class="dashboard">
+
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Vue d'ensemble de votre activité freelance</p>
+    </div>
+    <a routerLink="/quotes/new" class="btn btn-primary">
+      + Nouveau devis
+    </a>
+  </div>
+
+  <ng-container *ngIf="stats$ | async as stats">
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-icon-clients">👥</div>
+        <div class="kpi-content">
+          <span class="kpi-value">{{ stats.totalClients }}</span>
+          <span class="kpi-label">Clients</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon kpi-icon-quotes">📋</div>
+        <div class="kpi-content">
+          <span class="kpi-value">{{ stats.totalQuotes }}</span>
+          <span class="kpi-label">Devis total</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card-success">
+        <div class="kpi-icon kpi-icon-accepted">✅</div>
+        <div class="kpi-content">
+          <span class="kpi-value">
+            {{ stats.caAccepte | currency:'EUR':'symbol':'1.0-0':'fr' }}
+          </span>
+          <span class="kpi-label">CA accepté</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card-warning">
+        <div class="kpi-icon kpi-icon-sent">⏳</div>
+        <div class="kpi-content">
+          <span class="kpi-value">
+            {{ stats.caPotentiel | currency:'EUR':'symbol':'1.0-0':'fr' }}
+          </span>
+          <span class="kpi-label">CA potentiel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statuts + Devis récents -->
+    <div class="dashboard-grid">
+
+      <!-- Répartition statuts -->
+      <div class="card">
+        <h2 class="card-title">Répartition des devis</h2>
+
+        <div class="status-list">
+          <div class="status-item">
+            <div class="status-dot dot-draft"></div>
+            <span class="status-name">Brouillons</span>
+            <span class="status-count">{{ stats.totalDraft }}</span>
+            <div class="status-bar-wrap">
+              <div
+                class="status-bar bar-draft"
+                [style.width.%]="stats.totalQuotes ? (stats.totalDraft / stats.totalQuotes) * 100 : 0"
+              ></div>
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-dot dot-sent"></div>
+            <span class="status-name">Envoyés</span>
+            <span class="status-count">{{ stats.totalSent }}</span>
+            <div class="status-bar-wrap">
+              <div
+                class="status-bar bar-sent"
+                [style.width.%]="stats.totalQuotes ? (stats.totalSent / stats.totalQuotes) * 100 : 0"
+              ></div>
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-dot dot-accepted"></div>
+            <span class="status-name">Acceptés</span>
+            <span class="status-count">{{ stats.totalAccepted }}</span>
+            <div class="status-bar-wrap">
+              <div
+                class="status-bar bar-accepted"
+                [style.width.%]="stats.totalQuotes ? (stats.totalAccepted / stats.totalQuotes) * 100 : 0"
+              ></div>
+            </div>
+          </div>
+
+          <div class="status-item">
+            <div class="status-dot dot-rejected"></div>
+            <span class="status-name">Refusés</span>
+            <span class="status-count">{{ stats.totalRejected }}</span>
+            <div class="status-bar-wrap">
+              <div
+                class="status-bar bar-rejected"
+                [style.width.%]="stats.totalQuotes ? (stats.totalRejected / stats.totalQuotes) * 100 : 0"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Devis récents -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Devis récents</h2>
+          <a routerLink="/quotes" class="link-all">Voir tous →</a>
+        </div>
+
+        <div *ngIf="stats.recentQuotes.length === 0" class="empty-state">
+          Aucun devis pour l'instant
+        </div>
+
+       <div class="recent-list">
+        <ng-container *ngFor="let quote of stats.recentQuotes">
+            <a [routerLink]="['/quotes', quote._id]" class="recent-item">
+            <div class="recent-info">
+                <span class="recent-number">{{ quote.number }}</span>
+                <span class="recent-client">{{ quote.client.name }}</span>
+            </div>
+            <div class="recent-right">
+                <span class="badge badge-{{ quote.status }}">
+                {{ getStatusLabel(quote.status) }}
+                </span>
+            </div>
+            </a>
+        </ng-container>
+</div>

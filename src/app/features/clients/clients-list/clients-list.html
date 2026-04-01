@@ -1,0 +1,67 @@
+<div class="page-header">
+  <div>
+    <h1>Clients</h1>
+    <p>Gérez vos clients freelance</p>
+  </div>
+  <a routerLink="/clients/new" class="btn btn-primary">
+    + Nouveau client
+  </a>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading$ | async" class="state-container">
+  <div class="spinner"></div>
+  <p>Chargement...</p>
+</div>
+
+<!-- Error -->
+<div *ngIf="error$ | async as error" class="alert alert-danger">
+  ⚠️ {{ error }}
+</div>
+
+<!-- Liste -->
+<div *ngIf="!(loading$ | async)" class="clients-grid">
+  <ng-container *ngIf="(clients$ | async) as clients">
+
+    <!-- Vide -->
+    <div *ngIf="clients.length === 0" class="state-container">
+      <p class="empty-icon">👥</p>
+      <p>Aucun client pour l'instant</p>
+      <a routerLink="/clients/new" class="btn btn-primary">
+        Ajouter un client
+      </a>
+    </div>
+
+    <!-- Cards -->
+    <div *ngFor="let client of clients" class="client-card">
+      <div class="client-card-header">
+        <div class="client-avatar">
+          {{ client.name.charAt(0).toUpperCase() }}
+        </div>
+        <div class="client-info">
+          <h3>{{ client.name }}</h3>
+          <p>{{ client.email }}</p>
+        </div>
+      </div>
+
+      <div class="client-card-body">
+        <div *ngIf="client.phone" class="client-detail">
+          📞 {{ client.phone }}
+        </div>
+        <div *ngIf="client.address?.city" class="client-detail">
+          📍 {{ client.address?.city }}
+        </div>
+      </div>
+
+      <div class="client-card-footer">
+        <a [routerLink]="['/clients', client._id, 'edit']" class="btn btn-secondary">
+          ✏️ Modifier
+        </a>
+        <button (click)="onDelete(client._id)" class="btn btn-danger">
+          🗑️ Supprimer
+        </button>
+      </div>
+    </div>
+
+  </ng-container>
+</div>

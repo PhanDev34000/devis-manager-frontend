@@ -1,0 +1,51 @@
+<div class="app-container">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-icon">📄</span>
+      <span class="logo-text">FreelanceDevis</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🏠</span>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/clients" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span>Clients</span>
+      </a>
+      <a routerLink="/quotes" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📋</span>
+        <span>Devis</span>
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">👤</span>
+        <span>Mon Espace</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="btn-logout" (click)="onLogout()">
+        🚪 Déconnexion
+      </button>
+      <span>v1.0.0<br>Développé par Stéphane Vernière</span>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-title">
+        <h2>Gestionnaire de Devis</h2>
+      </div>
+      <div class="topbar-actions">
+        <span class="user-badge">
+          👤 {{ (user$ | async)?.profile?.companyName || 'Mon Espace' }}
+        </span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
