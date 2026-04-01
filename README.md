@@ -41,6 +41,7 @@ Application web de gestion de devis freelance, construite avec Angular et NgRx.
   - Mention légale "Bon pour accord"
 
 ## 📁 Structure du projet
+
 ```
 frontend/src/app/
 ├── core/
