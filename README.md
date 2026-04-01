@@ -2,6 +2,20 @@
 
 Application web de gestion de devis freelance, construite avec Angular et NgRx.
 
+## 📸 Captures d'écran
+
+| Dashboard | Mon Espace |
+|---|---|
+| ![Dashboard](https://github.com/user-attachments/assets/506d457a-4b61-4799-a09f-23c7a86d8bea) | ![Mon Espace](https://github.com/user-attachments/assets/bc60cee0-4022-4de3-b7af-3f5b8cd7a4fb) |
+
+| Liste Devis | Formulaire Devis |
+|---|---|
+| ![Devis](https://github.com/user-attachments/assets/f67b0ff8-e056-4923-82d2-872a37a13d27) | ![Formulaire](https://github.com/user-attachments/assets/07dfa8af-7f4e-4ea9-9e70-f0cf99995e38) |
+```
+
+---
+
+
 ## 🚀 Stack technique
 
 - **Angular 19** (standalone components, lazy loading)
@@ -87,12 +101,6 @@ export const environment = {
 
 L'application est déployée sur **Vercel** :
 - URL : `https://devis-manager-frontend.vercel.app`
-
-## 📸 Captures d'écran
-
-| Dashboard | Liste Devis | Formulaire Devis |
-|---|---|---|
-| ![Dashboard]() | ![Devis]() | ![Formulaire]() |
 
 ## 👨‍💻 Auteur
 
