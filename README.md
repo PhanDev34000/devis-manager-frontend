@@ -43,6 +43,7 @@ Application web de gestion de devis freelance, construite avec Angular et NgRx.
 ## 📁 Structure du projet
 
 ```
+
 frontend/src/app/
 ├── core/
 │   ├── guards/            # Auth guard
@@ -58,6 +59,7 @@ frontend/src/app/
     ├── auth/              # NgRx Auth
     ├── clients/           # NgRx Clients
     └── quotes/            # NgRx Quotes
+    
 ```
 
 ## 🧠 Architecture NgRx
